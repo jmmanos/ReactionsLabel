@@ -10,10 +10,10 @@ import UIKit
 
 @IBDesignable
 public class ReactionView: UIView {
-	public let reaction : Reaction
+	public let reactionType : ReactionType
 	
-	public init( reaction : Reaction ) {
-		self.reaction = reaction
+	public init( reactionType : ReactionType ) {
+		self.reactionType = reactionType
 		
 		super.init(frame: .zero)
 		
@@ -21,7 +21,7 @@ public class ReactionView: UIView {
 	}
 	
 	public override init(frame: CGRect) {
-		self.reaction = Like()
+		self.reactionType = .Like
 		
 		super.init(frame: frame)
 		
@@ -29,7 +29,7 @@ public class ReactionView: UIView {
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
-		self.reaction = Like()
+		self.reactionType = .Like
 		
 		super.init(coder: aDecoder)
 		
@@ -37,6 +37,8 @@ public class ReactionView: UIView {
 	}
 	
 	func setup() {
+		let reaction = ReactionType.reaction(reactionType)
+		
 		backgroundColor = reaction.backgroundColor
 		
 		for config in reaction.layerConfigurations {
@@ -72,7 +74,20 @@ public class ReactionView: UIView {
 		
 		print("")*/
 		
+		/*CATransaction.begin()
+		
+		if let animation = layer.animationForKey("bounds") {
+			CATransaction.setAnimationDuration(animation.duration)
+			CATransaction.setAnimationTimingFunction(animation.timingFunction)
+			
+			
+		} else {
+			CATransaction.disableActions()
+		}*/
+		
 		layer.cornerRadius = min(bounds.width, bounds.height)/2
+		
+		let reaction = ReactionType.reaction(reactionType)
 		
 		let scale = reaction.scale
 		
@@ -114,15 +129,9 @@ public class ReactionView: UIView {
 						let inset = (specialName && specialReaction) ? CGPoint.zero : CGPoint(x: minX, y: minY)
 						currentPath.moveToPoint(CGPoint(x: inset.x + p.x*w, y: inset.y + p.y*h))
 					case let .SetPosition(p):
-						CATransaction.begin()
-						CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
 						l.position = CGPoint(x: minX + p.x*w, y: minY + p.y*h)
-						CATransaction.commit()
 					case let .SetLineWidth(lineWidth):
-						CATransaction.begin()
-						CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
 						l.lineWidth = lineWidth * min(w,h)
-						CATransaction.commit()
 					case let .AddLine(p):
 						currentPath.addLineToPoint(CGPoint(x: minX + p.x*w, y: minY + p.y*h))
 					case let .AddCurve(p, cp1, cp2):
@@ -141,5 +150,7 @@ public class ReactionView: UIView {
 			
 			setNeedsDisplay()
 		}
+		
+		//CATransaction.commit()
 	}
 }

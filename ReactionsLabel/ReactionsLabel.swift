@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-public class ReactionsLabelView: UIView {
+public class ReactionsLabel: UIView {
 	private let previewItemsLimit = 3
 	private let reactionsSpacing : CGFloat = -3
 	private let reactionsScale : CGFloat = 1.1
@@ -21,8 +21,8 @@ public class ReactionsLabelView: UIView {
 	private weak var label : UILabel!
 	private weak var labelLeading : NSLayoutConstraint!
 	
-	private var reactionViews : [Reaction: (ReactionView, NSLayoutConstraint, NSLayoutConstraint)] = [:]
-	private var _reactions : [(Reaction , Int)] = []
+	private var reactionViews : [ReactionType: (ReactionView, NSLayoutConstraint, NSLayoutConstraint)] = [:]
+	private var _reactions : [(ReactionType , Int)] = []
 	
 	override public init(frame: CGRect) {
 		super.init(frame: frame)
@@ -74,12 +74,12 @@ public class ReactionsLabelView: UIView {
 		return label
 	}
 	
-	func findMostCommon( reactions : [Reaction] ) -> [(Reaction , Int)] {
+	func findMostCommon( reactions : [ReactionType] ) -> [(ReactionType , Int)] {
 		return reactions.frequencies()
 	}
 	
-	func addReaction( index: Int, reaction: Reaction) -> (() -> ()) {
-		let view = ReactionView( type: reaction)
+	func addReaction( index: Int, reaction: ReactionType) -> (() -> ()) {
+		let view = ReactionView( reactionType: reaction)
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.alpha = 0
 		view.layer.zPosition = 10 - CGFloat(index)
@@ -103,7 +103,7 @@ public class ReactionsLabelView: UIView {
 		}
 	}
 	
-	func removeReaction( index: Int, reaction: Reaction) -> (() -> (), () -> ()) {
+	func removeReaction( index: Int, reaction: ReactionType) -> (() -> (), () -> ()) {
 		guard let (view, centerY, _) = reactionViews[reaction] else { return ({}, {}) }
 		
 		reactionViews.removeValueForKey(reaction)
@@ -118,7 +118,7 @@ public class ReactionsLabelView: UIView {
 		})
 	}
 	
-	func moveReaction( fromIndex: Int, toIndex: Int, reaction: Reaction) -> (() -> ()) {
+	func moveReaction( fromIndex: Int, toIndex: Int, reaction: ReactionType) -> (() -> ()) {
 		guard let (view, _, leading) = reactionViews[reaction] else { return {} }
 		let constant = leadingConstant(toIndex)
 		view.layer.zPosition = 10 - CGFloat(toIndex)
@@ -127,7 +127,7 @@ public class ReactionsLabelView: UIView {
 		}
 	}
 	
-	func setReactions( loadedReactions : [Reaction] ) {
+	func setReactions( loadedReactions : [ReactionType] ) {
 		let newPopular = Array(findMostCommon( loadedReactions ).prefix(previewItemsLimit))
 		let oldPopular = Array(_reactions.prefix(previewItemsLimit))
 		
@@ -141,7 +141,7 @@ public class ReactionsLabelView: UIView {
 		var completion: [(Void->Void)] = []
 		
 		for d in del {
-			let index = _reactions.indexOf { $0.0.rawValue == d.rawValue }
+			let index = _reactions.indexOf { $0.0 == d }
 			let (anim, comp) = removeReaction(index!, reaction: d)
 			pending.append(anim)
 			completion.append(comp)
@@ -185,6 +185,7 @@ public class ReactionsLabelView: UIView {
 			self?.label?.alpha = finalAlpha
 			self?.labelLeading?.constant = leadingConstant
 			self?.superview?.layoutIfNeeded()
+			self?.invalidateIntrinsicContentSize()
 			}, completion: { fin in
 				//self.setNeedsDisplay()
 				completion.forEach { $0() }

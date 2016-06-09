@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct Love : Reaction {
+public struct LoveReaction : Reaction {
 	public var backgroundColor : UIColor {
 		return UIColor(red: 255/255, green: 40/255, blue: 81/255, alpha: 1)
 	}

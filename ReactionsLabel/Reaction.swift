@@ -13,3 +13,19 @@ public protocol Reaction {
 	var backgroundColor : UIColor { get }
 	var layerConfigurations : [LayerConfiguration] { get }
 }
+
+public enum ReactionType : UInt8 {
+	case Like = 0
+	case Love
+	case Laugh
+}
+
+extension ReactionType {
+	static public func reaction( type : ReactionType ) -> Reaction {
+		switch type {
+		case .Like: return LikeReaction()
+		case .Love: return LoveReaction()
+		case .Laugh: return LaughReaction()
+		}
+	}
+}
