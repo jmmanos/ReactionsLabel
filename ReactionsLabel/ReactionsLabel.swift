@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable
 public class ReactionsLabel: UIView {
-	private let previewItemsLimit = 3
+	private let previewItemsLimit = 6
 	private let reactionsSpacing : CGFloat = -3
 	private let reactionsScale : CGFloat = 1.1
 	private let frameInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

@@ -14,9 +14,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
-		print("Testing initial commit.")
-		
-		let reactions : [ReactionType] = [.Like, .Like, .Like, .Love, .Laugh]
+		let reactions : [ReactionType] = [.Like, .Like, .Like, .Love, .Laugh, .Shocked, .Angry, .Sad, .Shocked]
 		
 		reactionsLabel?.setReactions(reactions)
 	}

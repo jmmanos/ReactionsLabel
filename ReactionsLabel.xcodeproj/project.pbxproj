@@ -21,6 +21,9 @@
 		1EDCE2F21D07A18B00995868 /* ReactionsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCE2EA1D07A18B00995868 /* ReactionsLabel.swift */; };
 		1EDCE2F31D07A18B00995868 /* ReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCE2EB1D07A18B00995868 /* ReactionView.swift */; };
 		1EDCE2F81D08F23500995868 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCE2F71D08F23500995868 /* Array+Extensions.swift */; };
+		1EDCE2FA1D09217900995868 /* ShockedReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCE2F91D09217900995868 /* ShockedReaction.swift */; };
+		1EDCE2FC1D0922EC00995868 /* SadReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCE2FB1D0922EC00995868 /* SadReaction.swift */; };
+		1EDCE2FE1D09241B00995868 /* AngryReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDCE2FD1D09241B00995868 /* AngryReaction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		1EDCE2EA1D07A18B00995868 /* ReactionsLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactionsLabel.swift; path = ReactionsLabel/ReactionsLabel.swift; sourceTree = "<group>"; };
 		1EDCE2EB1D07A18B00995868 /* ReactionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactionView.swift; path = ReactionsLabel/ReactionView.swift; sourceTree = "<group>"; };
 		1EDCE2F71D08F23500995868 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		1EDCE2F91D09217900995868 /* ShockedReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShockedReaction.swift; sourceTree = "<group>"; };
+		1EDCE2FB1D0922EC00995868 /* SadReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SadReaction.swift; sourceTree = "<group>"; };
+		1EDCE2FD1D09241B00995868 /* AngryReaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AngryReaction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,9 @@
 				1EDCE2E41D07A18B00995868 /* LaughReaction.swift */,
 				1EDCE2E61D07A18B00995868 /* LikeReaction.swift */,
 				1EDCE2E71D07A18B00995868 /* LoveReaction.swift */,
+				1EDCE2F91D09217900995868 /* ShockedReaction.swift */,
+				1EDCE2FB1D0922EC00995868 /* SadReaction.swift */,
+				1EDCE2FD1D09241B00995868 /* AngryReaction.swift */,
 			);
 			name = BaseReactions;
 			sourceTree = "<group>";
@@ -186,12 +195,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EDCE2FE1D09241B00995868 /* AngryReaction.swift in Sources */,
 				1EDCE2ED1D07A18B00995868 /* LayerConfiguration.swift in Sources */,
 				1EDCE2BF1D07969700995868 /* ViewController.swift in Sources */,
+				1EDCE2FA1D09217900995868 /* ShockedReaction.swift in Sources */,
 				1EDCE2BD1D07969700995868 /* AppDelegate.swift in Sources */,
 				1EDCE2F81D08F23500995868 /* Array+Extensions.swift in Sources */,
 				1EDCE2EF1D07A18B00995868 /* LoveReaction.swift in Sources */,
 				1EDCE2EC1D07A18B00995868 /* LaughReaction.swift in Sources */,
+				1EDCE2FC1D0922EC00995868 /* SadReaction.swift in Sources */,
 				1EDCE2F01D07A18B00995868 /* PathOperation.swift in Sources */,
 				1EDCE2F21D07A18B00995868 /* ReactionsLabel.swift in Sources */,
 				1EDCE2F11D07A18B00995868 /* Reaction.swift in Sources */,

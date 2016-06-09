@@ -74,7 +74,7 @@ public class ReactionView: UIView {
 		
 		print("")*/
 		
-		/*CATransaction.begin()
+		CATransaction.begin()
 		
 		if let animation = layer.animationForKey("bounds") {
 			CATransaction.setAnimationDuration(animation.duration)
@@ -83,7 +83,7 @@ public class ReactionView: UIView {
 			
 		} else {
 			CATransaction.disableActions()
-		}*/
+		}
 		
 		layer.cornerRadius = min(bounds.width, bounds.height)/2
 		
@@ -92,7 +92,7 @@ public class ReactionView: UIView {
 		let scale = reaction.scale
 		
 		let size = min(bounds.width, bounds.height) * scale
-		let newOrigin = CGPoint(x: bounds.minX + frame.width/2 - size/2, y: bounds.minY + frame.height/2 - size/2)
+		let newOrigin = CGPoint(x: bounds.width/2 - size/2, y: bounds.height/2 - size/2)
 		
 		let rect = CGRect(origin: newOrigin, size: CGSize(width: size, height: size))
 		
@@ -111,10 +111,7 @@ public class ReactionView: UIView {
 				for op in pathOperations {
 					switch op {
 					case let .Oval(r):
-						let specialName = name == "leftEye" || name == "rightEye" || name == "leftEyebrow" || name == "rightEyebrow"
-						let specialReaction = false//reaction == .Shocked
-						
-						let origin = (specialName && specialReaction) ? CGPoint.zero : CGPoint(x: minX + r.minX*w, y: minY + r.minY*h)
+						let origin = CGPoint(x: minX + r.minX*w, y: minY + r.minY*h)
 						let size = CGSize(width: r.width*w, height: r.height*h)
 						let newRect = CGRect(origin: origin, size: size)
 						currentPath = UIBezierPath(ovalInRect: newRect)
@@ -124,9 +121,7 @@ public class ReactionView: UIView {
 						let newRect = CGRect(origin: origin, size: size)
 						currentPath = UIBezierPath(roundedRect: newRect, cornerRadius: c*w)
 					case let .MoveTo(p):
-						let specialName = name == "leftEye" || name == "rightEye" || name == "leftEyebrow" || name == "rightEyebrow"
-						let specialReaction = false//(reaction == .Shocked || reaction == .Sad)
-						let inset = (specialName && specialReaction) ? CGPoint.zero : CGPoint(x: minX, y: minY)
+						let inset = CGPoint(x: minX, y: minY)
 						currentPath.moveToPoint(CGPoint(x: inset.x + p.x*w, y: inset.y + p.y*h))
 					case let .SetPosition(p):
 						l.position = CGPoint(x: minX + p.x*w, y: minY + p.y*h)
@@ -135,9 +130,7 @@ public class ReactionView: UIView {
 					case let .AddLine(p):
 						currentPath.addLineToPoint(CGPoint(x: minX + p.x*w, y: minY + p.y*h))
 					case let .AddCurve(p, cp1, cp2):
-						let specialName = name == "leftEye" || name == "rightEye" || name == "leftEyebrow" || name == "rightEyebrow"
-						let specialReaction = false//(reaction == .Shocked || reaction == .Sad)
-						let i = (specialName && specialReaction) ? CGPoint.zero : CGPoint(x: minX, y: minY)
+						let i = CGPoint(x: minX, y: minY)
 						
 						currentPath.addCurveToPoint( CGPoint(x: i.x+p.x*w,y: i.y+p.y*h), controlPoint1: CGPoint(x: i.x+cp1.x*w,y: i.y+cp1.y*h), controlPoint2: CGPoint(x: i.x+cp2.x*w,y: i.y+cp2.y*h))
 					case .Close:
@@ -148,9 +141,9 @@ public class ReactionView: UIView {
 				l.path = currentPath.CGPath
 			}
 			
-			setNeedsDisplay()
+			//setNeedsDisplay()
 		}
 		
-		//CATransaction.commit()
+		CATransaction.commit()
 	}
 }

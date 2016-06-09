@@ -18,6 +18,9 @@ public enum ReactionType : UInt8 {
 	case Like = 0
 	case Love
 	case Laugh
+	case Shocked
+	case Sad
+	case Angry
 }
 
 extension ReactionType {
@@ -26,6 +29,9 @@ extension ReactionType {
 		case .Like: return LikeReaction()
 		case .Love: return LoveReaction()
 		case .Laugh: return LaughReaction()
+		case .Shocked: return ShockedReaction()
+		case .Sad: return SadReaction()
+		case .Angry: return AngryReaction()
 		}
 	}
 }
